@@ -1,0 +1,90 @@
+m255
+K3
+13
+cModel Technology
+dF:\modeltech_10.1a\examples
+T_opt
+Ve`9dXPZ>38@dn_D=RUL=<0
+04 11 3 work adc08009_tb one 1
+=1-000ec6c4ccb3-57405910-68-2e68
+o-quiet -auto_acc_if_foreign -work work
+n@_opt
+OE;O;10.1a;51
+Eadc08009_tb
+Z0 w1463834770
+Z1 DPx4 ieee 15 std_logic_arith 0 22 4`Y?g_lkdn;7UL9IiJck01
+Z2 DPx4 ieee 18 std_logic_unsigned 0 22 RYmj;=TK`k=k>D@Cz`zoB3
+Z3 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z4 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z5 dD:\LEARN\fpga_assignment
+Z6 8D:\LEARN\fpga_assignment\adc0809_tb.vhd
+Z7 FD:\LEARN\fpga_assignment\adc0809_tb.vhd
+l0
+L9
+Vnh76akY8UgQ1jTQRT8lQ>3
+Z8 OE;C;10.1a;51
+32
+Z9 !s108 1463834888.708000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|D:\LEARN\fpga_assignment\adc0809_tb.vhd|
+Z11 !s107 D:\LEARN\fpga_assignment\adc0809_tb.vhd|
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1
+!s100 nOe[jeL]0MNljd>]:PRlm3
+!i10b 1
+Aone
+R1
+R2
+R3
+R4
+DEx4 work 11 adc08009_tb 0 22 nh76akY8UgQ1jTQRT8lQ>3
+l39
+L13
+V`bL;NQ6eaeZhcOkz1<eIW1
+R8
+32
+R9
+R10
+R11
+R12
+R13
+!s100 DH@le?Z6DPg@cX4MgkV9H3
+!i10b 1
+Eadc0809
+Z14 w1463834135
+R1
+R2
+R3
+R4
+R5
+Z15 8D:\LEARN\fpga_assignment\adc0809.vhd
+Z16 FD:\LEARN\fpga_assignment\adc0809.vhd
+l0
+L4
+VBI8ih<kgV4kRN49D]TDBm1
+R8
+32
+Z17 !s108 1463834888.513000
+Z18 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|D:\LEARN\fpga_assignment\adc0809.vhd|
+Z19 !s107 D:\LEARN\fpga_assignment\adc0809.vhd|
+R12
+R13
+!s100 W<?5lRHg<n2LI8RWecZI01
+!i10b 1
+Abehav
+R1
+R2
+R3
+R4
+DEx4 work 7 adc0809 0 22 BI8ih<kgV4kRN49D]TDBm1
+l17
+L11
+V>gmZAon6D=?LcH0<4VVfL3
+R8
+32
+R17
+R18
+R19
+R12
+R13
+!s100 ]`=W2g:Z@80ebbCU[R1AL3
+!i10b 1

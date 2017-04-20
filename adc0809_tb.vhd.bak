@@ -1,0 +1,39 @@
+ ---------------ADC0809TestBench----------------- 
+ LIBRARY IEEE; 
+ USE IEEE.STD_LOGIC_1164.ALL; 
+ USE IEEE.STD_LOGIC_UNSIGNED.ALL;  
+ ENTITY adc08009_tb IS            --??? 
+ END adc08009_tb;  
+ ARCHITECTURE one OF adc08009_tb IS        --??? 
+ COMPONENT adc0809    
+ PORT(D:IN STD_LOGIC_VECTOR(7 DOWNTO 0);--??0809????8???
+        CLK:IN STD_LOGIC;                    --???????
+        EOC:IN STD_LOGIC;                    --????????????????
+        ALE:OUT STD_LOGIC;              --8?????????????
+        START:OUT STD_LOGIC;                 --??????
+        OE:OUT STD_LOGIC;                    --????3?????
+        ADD:OUT STD_LOGIC_VECTOR(2 DOWNTO 0):="000");                  --???????????
+--        LOCK0:OUT STD_LOGIC);                 --????????
+
+ END COMPONENT; 
+ SIGNAL CLK,START,EOC,OE,ALE:STD_LOGIC:='0'; 
+ SIGNAL D:STD_LOGIC_VECTOR(7 DOWNTO 0):="00000000"; 
+ SIGNAL ADD:STD_LOGIC_VECTOR(2 DOWNTO 0):="000"; 
+ BEGIN
+ U1:ADC0809 
+ PORT MAP(CLK=>CLK,START=>START,EOC=>EOC,OE=>OE,ALE=>ALE, --Q=>Q,
+ D=>D,ADD=>ADD);--LOCK0=>LOCK0);  
+    PROCESS BEGIN     
+      CLK<='1'; WAIT FOR 1ns     
+      CLK<='0'; WAIT FOR 1ns; 
+    END PROCESS; 
+    PROCESS BEGIN 
+    WAIT FOR 10 ns;     
+     EOC<='1'; WAIT FOR 10 ns;      
+     EOC<='0'; WAIT FOR 10 ns;    
+    END PROCESS;    
+  END one;
+
+
+
+

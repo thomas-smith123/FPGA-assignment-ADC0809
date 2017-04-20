@@ -1,0 +1,92 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+ENTITY adc0809 IS
+    PORT(D:IN STD_LOGIC_VECTOR(7 DOWNTO 0);--??0809????8???
+        CLK:IN STD_LOGIC;                    --???????
+        EOC:IN STD_LOGIC;                    --????????????????
+        ALE:OUT STD_LOGIC;              --8?????????????
+        START:OUT STD_LOGIC;                 --??????
+        OE:OUT STD_LOGIC;                    --????3?????
+        ADD:OUT STD_LOGIC_VECTOR(2 DOWNTO 0):="000"                  --???????????
+--        LOCK0:OUT STD_LOGIC                 --????????
+--        Q:OUT STD_LOGIC_VECTOR(7 DOWNTO 0)--8?????
+    );   
+END adc0809;
+ARCHITECTURE behav OF adc0809 IS
+    TYPE states IS(st0,st1,st2,st3,st4);  --????????
+    SIGNAL current_state ,next_state :states :=st0;
+    SIGNAL REGL :STD_LOGIC_VECTOR(7 DOWNTO 0);
+    SIGNAL INERDATA:INTEGER:=0;
+    SIGNAL LOCK :STD_LOGIC;              --?????????????
+    BEGIN
+        ------------------??REG---------------------
+        --?REG????????????????????????
+        PROCESS(CLK)
+       BEGIN       
+        IF CLK='1' and CLK'event THEN            -- ???????
+                IF next_state=st0 THEN         -- ??????
+                    current_state<=st0;
+                ELSIF  next_state=st1 THEN     --????(st1)
+                    current_state<=st1;
+                ELSIF  next_state=st2 THEN  --?????????EOC??????
+                    current_state<=st2;
+                ELSIF  next_state=st3 THEN
+                    current_state<=st3;
+                ELSIF  next_state=st4 THEN
+                    current_state<=st4;
+                END IF;
+            END IF;   
+        END PROCESS;       
+        ------------------??COM2---------------------
+        --?COM2???????????????????????
+        PROCESS(current_state,EOC)       
+        VARIABLE First_EOC :STD_LOGIC;
+       BEGIN
+                IF current_state=st0 THEN         -- ??????
+                    ALE<='1';
+                    START<='0';
+                    OE<='0';
+                    LOCK<='0';
+                    next_state<=st1;
+                ELSIF  current_state=st1 THEN     --????(st1)
+                    START<='1';
+                    ALE<='0';
+                    --IF EOC='0' THEN      -- ????
+                        next_state<=st2;
+                        First_EOC:=EOC;--???1??EOC???????AD??????
+                    --END IF;
+                ELSIF  current_state=st2 THEN    --?????????EOC??????
+                    START<='0';
+                    OE<='0';
+                    if'1'=(First_EOC XOR EOC)then
+                        IF EOC='1'  THEN
+                            -- IF EOC='1'  THEN
+                                next_state<=st3;
+                            -- END IF;
+                        -- else
+                               -- next_state<=st2;
+                            END IF;
+                    else
+                        next_state<=st2;
+                    END IF;
+                ELSIF  current_state=st3 THEN
+                    --LED2<='1';
+                    IF EOC='1'  THEN        -- ????
+                        OE<='1';
+                        next_state<=st4;
+                    ELSE
+                        OE<='0';                       
+                    END IF;
+                ELSIF  current_state=st4 THEN
+                    OE<='0';
+                    LOCK<='1';
+				IF INERDATA=7 THEN INERDATA<=0;
+                ELSE INERDATA<=INERDATA+1;
+                  END IF;
+                    ADD<=conv_std_logic_vector(INERDATA,3);
+                    --ADD<=ADD+'1';
+                    next_state<=st0;         --?????????
+                END IF;
+        END PROCESS;
+    END ARCHITECTURE behav;
